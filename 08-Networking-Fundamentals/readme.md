@@ -117,7 +117,7 @@ These resources are provided as optional, recommended resources to supplement th
 
 This unit's homework assignment can be viewed here: 
 
-- [https://github.com/GSoliz/Cybersecurity/blob/master/08-Networking-Fundamentals/Homework/resources/Networking%20Fundamentals%20Homework:%20Rocking%20your%20Network!](https://github.com/GSoliz/Cybersecurity/blob/master/08-Networking-Fundamentals/Homework/readme.md)
+- (https://github.com/GSoliz/Cybersecurity/blob/master/08-Networking-Fundamentals/Homework/resources/Networking%20Fundamentals%20Homework:%20Rocking%20your%20Network!)(https://github.com/GSoliz/Cybersecurity/blob/master/08-Networking-Fundamentals/Homework/readme.md)
 
 ### Looking Forward 
 

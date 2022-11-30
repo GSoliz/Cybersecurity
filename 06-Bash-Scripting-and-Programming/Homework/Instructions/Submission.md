@@ -24,7 +24,8 @@ Save and submit the completed file for your homework submission.
    
 6. Test that `sudo` access works without your password:
 
-    ```sudo -l sysd
+    ```
+       sudo -l sysd
        sudo apt-get update
        sudo -h
     ```

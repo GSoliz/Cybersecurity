@@ -10,45 +10,66 @@ Save and submit the completed file for your homework submission.
 
 1. Command to **extract** the `TarDocs.tar` archive to the current directory:
 
+    `tar -xvf TarDocs.tar`
+
 2. Command to **create** the `Javaless_Doc.tar` archive from the `TarDocs/` directory, while excluding the `TarDocs/Documents/Java` directory:
+
+     `sudo tar -cvf Javaless_Docs.tar --exclude-tag=Java ~/Projects/TarDocs`
 
 3. Command to ensure `Java/` is not in the new `Javaless_Docs.tar` archive:
 
-**Bonus** 
-- Command to create an incremental archive called `logs_backup_tar.gz` with only changed files to `snapshot.file` for the `/var/log` directory:
+    `tar -tf Javaless_Docs.tar | grep -rw Java *`
 
 #### Critical Analysis Question
 
 - Why wouldn't you use the options `-x` and `-c` at the same time with `tar`?
 
----
+--- I would not use the command -c (create) and -x (extract) because you can not create an archive and extract the tar files from that archive at the same time.
 
 ### Step 2: Create, Manage, and Automate Cron Jobs
 
 1. Cron job for backing up the `/var/log/auth.log` file:
 
----
+    `6 * * 3 tar -czf /auth_backup.tgz /var/log/auth.log`
 
 ### Step 3: Write Basic Bash Scripts
 
 1. Brace expansion command to create the four subdirectories:
 
+    `sudo mkdir -p ~/backups/{freemem, diskuse, openlist, freedisk}`
+
 2. Paste your `system.sh` script edits below:
 
-    ```bash
+    ```
     #!/bin/bash
-    [Your solution script contents here]
+    
+    # Print free memory and save it to ~/backups/freemem/free_mem.txt
+    free -h > ~/backups/freemem/free_mem.txt
+    
+    # Print disk usage and saves it to ~/backups/diskuse/disk_use.txt
+    du -h >> ~/backups/diskuse/disk_usage.txt
+    
+    # lists all open files and saves it to~/backups/openlist/open_list.txt
+    lsof > ~/backups/openlist/open_list.txt
+    
+    # Print file system disk space and saves it to~/backups/freedisk/free_disk.txt
+    df -h >> ~/backups/freedisk/free_disk.txt
     ```
 
 3. Command to make the `system.sh` script executable:
 
+    `chmod +x system.sh`
+
 **Optional**
 - Commands to test the script and confirm its execution:
 
-**Bonus**
-- Command to copy `system` to system-wide cron directory:
-
----
+    ```
+     Sudo ./system.sh
+     sudo cat ~/backups/freedisk/free_disk.txt
+     sudo cat ~/backups/freemem/free_mem.txt
+     sudo cat ~/backups/diskuse/disk_usage.txt
+     sudo cat ~/backups/openlist/open_list.txt
+    ```
 
 ### Step 4. Manage Log File Sizes
  
@@ -58,62 +79,17 @@ Save and submit the completed file for your homework submission.
 
     - Add your config file edits below:
 
-    ```bash
-    [Your logrotate scheme edits here]
     ```
----
+        /var/log/auth.log {
+  	    
+            Rotate 7
+  	        weekly
+  	        notifempty
+  	        delaycompress
+  	        missingok
+ 	        endscript
+        }
 
-### Bonus: Check for Policy and File Violations
-
-1. Command to verify `auditd` is active:
-
-2. Command to set number of retained logs and maximum log file size:
-
-    - Add the edits made to the configuration file below:
-
-    ```bash
-    [Your solution edits here]
     ```
-
-3. Command using `auditd` to set rules for `/etc/shadow`, `/etc/passwd` and `/var/log/auth.log`:
-
-
-    - Add the edits made to the `rules` file below:
-
-    ```bash
-    [Your solution edits here]
-    ```
-
-4. Command to restart `auditd`:
-
-5. Command to list all `auditd` rules:
-
-6. Command to produce an audit report:
-
-7. Create a user with `sudo useradd attacker` and produce an audit report that lists account modifications:
-
-8. Command to use `auditd` to watch `/var/log/cron`:
-
-9. Command to verify `auditd` rules:
-
----
-
-### Bonus (Research Activity): Perform Various Log Filtering Techniques
-
-1. Command to return `journalctl` messages with priorities from emergency to error:
-
-1. Command to check the disk usage of the system journal unit since the most recent boot:
-
-1. Comand to remove all archived journal files except the most recent two:
-
-
-1. Command to filter all log messages with priority levels between zero and two, and save output to `/home/sysadmin/Priority_High.txt`:
-
-1. Command to automate the last command in a daily cronjob. Add the edits made to the crontab file below:
-
-    ```bash
-    [Your solution cron edits here]
-    ```
-
 ---
 © 2020 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.

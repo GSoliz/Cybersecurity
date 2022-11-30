@@ -34,7 +34,8 @@ Save and submit the completed file for your homework submission.
 
 1. Edit the `sshd_config` file:
 
-    ```nano etc/ssh/sshd_config
+    ```
+        nano etc/ssh/sshd_config 
     ```
 
 **Step 3: Testing Your Configuration Update**
